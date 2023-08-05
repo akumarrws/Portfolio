@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --gap: 25px;
+    --primary-color-values: 135, 206, 250;
+    --primary-color: lightskyblue;
+    --accent-color: forestgreen;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    min-height: 100dvh;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 10px 5rem;
+
+    min-height: 100px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gap);
+
+    border-bottom: solid 1px var(--primary-color);
+}
+
+header .logo {
+    position: relative;
+
+    height: 82px;
+    aspect-ratio: 1;
+    
+    display: flex;
+
+    border-radius: 50%;
+
+    background-color: var(--primary-color);
+    outline: solid 1px black;
+}
+
+header .right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap);
+
+    .email {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+header nav {
+    padding: var(--gap);
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+
+    & .nav-link {
+        padding: 10px 15px;
+
+        min-width: 50px;
+
+        background-color: var(--primary-color);
+
+        border: solid 1px black;
+        border-radius: 100vh;
+
+        text-align: center;
+    }
+}
+
+section:is(.page-title, .section-title) {
+    border-bottom: solid 1px var(--primary-color);
+
+    &.section-title {
+        width: calc(100% + var(--gap)*2);
+
+        :is(main, section) & h2.section-title {
+            margin-block-start: 0;
+        }
+    }
+
+    & h1.page-title, h2.section-title {
+        text-wrap: balance;
+        text-align: center;
+    }
+}
+
+main {
+    padding: 25px;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap)
+}
+
+section.break {
+    width: calc(100% + var(--gap)*2);
+    & div.break {
+        width: 100%;
+        height: 1px;
+
+        background-color: var(--primary-color);
+    }
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+   	<title>Notable Quotes</title>
+   	<style>
+   		body {
+   			font-family: Arial, Helvetica, sans-serif;
+   		}
+   		#quotes {
+   			background-color: #F1EAFF;
+
+			&.hasQuotes {
+				padding: 10px 0;
+			}
+   		}
+   	</style>
+   </head>
+	<body>
+		<h1>Notable Quotes</h1>
+
+		<p>
+			<label for="topicSelection">Select a topic:</label>
+			<select id="topicSelection">
+                <option>Choose one</option>
+				<option>love</option>
+				<option>motivational</option>
+				<option>wisdom</option>
+				<option>humor</option>
+			</select>
+		</p>
+		<p>
+			<label for="countSelection">How many quotes?</label>
+			<select id="countSelection">
+				<option>1</option>
+				<option>2</option>
+				<option selected>3</option>
+				<option>4</option>
+				<option>5</option>
+                <option>Error</option>
+			</select>
+		</p>
+		<p>
+		   <button id="fetchQuotesBtn">Fetch Quotes</button>
+		</p>
+		<div id="quotes"></div>
+		<script>
+			var errors = {
+			200: 'Successful', 
+			301: 'Resource Moved', 
+			400: 'Bad Request', 
+			401: 'Unauthorized', 
+			403: 'Forbidden', 
+			404: 'Not Found', 
+			500: 'Internal Server Error', 
+			503: 'Service Unavailable', 
+			}
+
+
+			document.querySelector("#fetchQuotesBtn").addEventListener("click", function () {
+
+				// Get values from drop-downs
+				const topicDropdown = document.querySelector("#topicSelection");
+				const countDropdown = document.querySelector("#countSelection");
+				const selectedTopic = topicDropdown.options[topicDropdown.selectedIndex].value;
+				const selectedCount = countDropdown.options[countDropdown.selectedIndex].value;
+					
+				// Get and display quotes
+				fetchQuotes(selectedTopic, selectedCount);	   
+			});
+
+			function fetchQuotes(topic, count) {
+				// TODO: Modify to use XMLHttpRequest
+				let xhr = new XMLHttpRequest();
+				xhr.addEventListener("load", responseReceivedHandler);   
+				xhr.open("GET", `https://wp.zybooks.com/quotes.php?topic=${topic}&count=${count}`);
+				xhr.responseType = "json";
+				xhr.send();
+				xhr.addEventListener('load', responseReceivedHandler)
+			}
+
+			// TODO: Add responseReceivedHandler() here
+			function responseReceivedHandler() {
+				let html = '';
+				if (this.status === 200) {
+					if (!this.response.error) {
+					let count = this.response.length
+					html = '<ol>';
+					for (let c = 0; c <= count-1; c++) {
+						let quote = this.response[c].quote
+						let author = this.response[c].source
+						html += `<li>${quote} - ${author}</li>`;
+					}
+					html += '</ol>';
+					}
+					else {
+					html = `<h1>Error: ${this.response.error}</h1>`
+					}
+				}
+				else {
+					html = `<h1>Error: ${this.status} ${errors[this.status]}</h1>`
+				}
+				document.querySelector("#quotes").classList.add('hasQuotes')
+				document.querySelector("#quotes").innerHTML = html;
+			}
+		</script>
+	</body>
+</html>

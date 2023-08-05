@@ -1,0 +1,36 @@
+main {
+    align-items: center;
+}
+
+section.about {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+
+    & span {
+        display: inline-block;
+        width: min(750px, 100%);
+
+        text-wrap: balance;
+    }
+}
+
+section.me {
+
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    height: 384px;
+
+    & div.me {
+        height: 100%;
+        aspect-ratio: 1;
+
+        background-image: url('/me.jpg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}
