@@ -7,7 +7,7 @@
 
     border-bottom: solid 1px var(--primary-color);
 
-    background-image: url('photos/IMG_0135.jpg');
+    background-image: url('../photos/IMG_0135.jpg');
     background-size: min(1000px, 100%);
     background-position: top;
     background-repeat: no-repeat;
